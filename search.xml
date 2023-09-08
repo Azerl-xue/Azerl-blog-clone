@@ -4,11 +4,150 @@
   
     
     <entry>
+      <title>Java中Enumeration接口的用法</title>
+      <link href="/2023/09/08/Java%E4%B8%ADEnumeration%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+      <url>/2023/09/08/Java%E4%B8%ADEnumeration%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java中Enumeration接口的用法"><a href="#Java中Enumeration接口的用法" class="headerlink" title="Java中Enumeration接口的用法"></a>Java中Enumeration接口的用法</h1><p>Enumeration是java.util中的一个接口类，在Enumeration中封装了有关枚举数据集合的方法，与Iterator差不多，用来遍历集合中的元素 但是枚举Enumeration只提供了遍历Vector和Hashtable类型集合元素的功能，这种类型的集合对象通过调用elements()方法获取一个Enumeration对象 然后Enumeratino对象再调用以下方法来对集合中的元素进行遍历。</p><p>hasMoreElements()：判断Enumeration对象中是否还有数据</p><p>nextElement()：获取Enumeration对象中的下一个数据</p><p>实例如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Enumeration</span> <span class="variable">req</span> <span class="operator">=</span> request.getParameterNames();</span><br><span class="line"> <span class="keyword">while</span> (req.hasMoreElements()) &#123;</span><br><span class="line">   <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> (Object) req.nextElement();</span><br><span class="line">   <span class="keyword">if</span> (obj.toString().trim().equals(<span class="string">&quot;LastPage&quot;</span>)) &#123;  </span><br><span class="line">     System.out.println(<span class="string">&quot;LastPage \n&quot;</span>);</span><br><span class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj.toString().trim().equals(<span class="string">&quot;NextPage&quot;</span>)) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;NextPage&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaSE </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> 集合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HashMap 和Hashtable的区别？HashMap 和HashSet 区别？HashMap 和 TreeMap 区别？</title>
+      <link href="/2023/09/08/HashMap-%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9FHashMap-%E5%92%8CHashSet-%E5%8C%BA%E5%88%AB%EF%BC%9FHashMap-%E5%92%8C-TreeMap-%E5%8C%BA%E5%88%AB%EF%BC%9F/"/>
+      <url>/2023/09/08/HashMap-%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9FHashMap-%E5%92%8CHashSet-%E5%8C%BA%E5%88%AB%EF%BC%9FHashMap-%E5%92%8C-TreeMap-%E5%8C%BA%E5%88%AB%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HashMap-和Hashtable的区别？HashMap-和HashSet-区别？HashMap-和-TreeMap-区别？"><a href="#HashMap-和Hashtable的区别？HashMap-和HashSet-区别？HashMap-和-TreeMap-区别？" class="headerlink" title="HashMap 和Hashtable的区别？HashMap 和HashSet 区别？HashMap 和 TreeMap 区别？"></a>HashMap 和Hashtable的区别？HashMap 和HashSet 区别？HashMap 和 TreeMap 区别？</h1><p><strong>相同点:</strong></p><p>hashmap和Hashtable都实现了map、Cloneable（可克隆）、Serializable（可序列化）这三个接口<br><strong>不同点:</strong></p><ol><li>底层数据结构不同:jdk1.7底层都是数组+链表,但jdk1.8 HashMap加入了红黑树</li><li>Hashtable 是不允许键或值为 null 的，HashMap 的键值则都可以为 null。</li><li>添加key-value的hash值算法不同：HashMap添加元素时，是使用自定义的哈希算法,而HashTable是直接采用key的hashCode()</li><li>实现方式不同：Hashtable 继承的是 Dictionary类，而 HashMap 继承的是 AbstractMap 类。</li><li>初始化容量不同：HashMap 的初始容量为：16，Hashtable 初始容量为：11，两者的负载因子默认都是：0.75。</li><li>扩容机制不同：当已用容量&gt;总容量 * 负载因子时，HashMap 扩容规则为当前容量翻倍，Hashtable 扩容规则为当前容量翻倍 +1。</li><li>支持的遍历种类不同：HashMap只支持Iterator遍历,而HashTable支持Iterator和Enumeration两种方式遍历</li><li>迭代器不同：HashMap的迭代器(Iterator)是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改了HashMap的结构（增加或者移除元素），将会抛出ConcurrentModificationException，但迭代器本身的remove()方法移除元素则不会抛出ConcurrentModificationException异常。但这并不是一个一定发生的行为，要看JVM。而Hashtable 则不会。</li><li>部分API不同：HashMap不支持contains(Object value)方法，没有重写toString()方法,而HashTable支持contains(Object value)方法，而且重写了toString()方法</li><li>同步性不同: Hashtable是同步(synchronized)的，适用于多线程环境,<br>而hashmap不是同步的，适用于单线程环境。多个线程可以共享一个Hashtable；而如果没有正确的同步的话，多个线程是不能共享HashMap的。</li></ol><p>由于Hashtable是线程安全的也是synchronized，所以在单线程环境下它比HashMap要慢。如果你不需要同步，只需要单一线程，那么使用HashMap性能要好过Hashtable。</p><p>原文链接：<a href="https://blog.csdn.net/qq_42848910/article/details/107779037">https://blog.csdn.net/qq_42848910/article/details/107779037</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaSE </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> 集合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HashSet、LinkedHashSet和TreeSet三者区别与联系</title>
+      <link href="/2023/09/08/HashSet%E3%80%81LinkedHashSet%E5%92%8CTreeSet%E4%B8%89%E8%80%85%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/"/>
+      <url>/2023/09/08/HashSet%E3%80%81LinkedHashSet%E5%92%8CTreeSet%E4%B8%89%E8%80%85%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HashSet、LinkedHashSet和TreeSet三者区别与联系"><a href="#HashSet、LinkedHashSet和TreeSet三者区别与联系" class="headerlink" title="HashSet、LinkedHashSet和TreeSet三者区别与联系"></a>HashSet、LinkedHashSet和TreeSet三者区别与联系</h1><p>一.HashSet<br>特点：</p><p>1.HashSet中不能有相同的元素，可以有一个Null元素，存入的元素是无序的。</p><p>2.HashSet如何保证唯一性？</p><p>1).HashSet底层数据结构是哈希表，哈希表就是存储唯一系列的表，而哈希值是由对象的hashCode()方法生成。</p><p>2).确保唯一性的两个方法：hashCode()和equals()方法。</p><p>3.添加、删除操作时间复杂度都是O(1)。</p><p>4.非线程安全</p><p>二.LinkedHashSet<br>特点：</p><p>1.LinkedHashSet中不能有相同元素，可以有一个Null元素，元素严格按照放入的顺序排列。</p><p>2.LinkedHashSet如何保证有序和唯一性？</p><p>1).底层数据结构由哈希表和链表组成。</p><p>2).链表保证了元素的有序即存储和取出一致，哈希表保证了元素的唯一性。</p><p>3.添加、删除操作时间复杂度都是O(1)。</p><p>4.非线程安全</p><p>三.TreeSet<br>特点：</p><p>1.TreeSet是中不能有相同元素，不可以有Null元素，根据元素的自然顺序进行排序。</p><p>2.TreeSet如何保证元素的排序和唯一性？</p><p>底层的数据结构是红黑树(一种自平衡二叉查找树)</p><p>3.添加、删除操作时间复杂度都是O(log(n))</p><p>4.非线程安全</p><p>四.总结：<br>通过以上特点可以分析出，三者都保证了元素的唯一性，如果无排序要求可以选用HashSet；如果想取出元素的顺序和放入元素的顺序相同，那么可以选用LinkedHashSet。如果想插入、删除立即排序或者按照一定规则排序可以选用TreeSet。</p><p>原文链接：<a href="https://blog.csdn.net/StemQ/article/details/66477615">https://blog.csdn.net/StemQ/article/details/66477615</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaSE </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> 集合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>gateway 配置全局corsconfig时的错误</title>
+      <link href="/2023/09/08/gateway-%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80corsconfig%E6%97%B6%E7%9A%84%E9%94%99%E8%AF%AF/"/>
+      <url>/2023/09/08/gateway-%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80corsconfig%E6%97%B6%E7%9A%84%E9%94%99%E8%AF%AF/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://picdm.sunbangyan.cn/2023/09/08/spm6vo.png"></p><p>排查发现：包名的错误</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;</span><br></pre></td></tr></table></figure><p>避雷</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> bug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring cloud </tag>
+            
+            <tag> spring cloud gateway </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Map.Entry学习和详解</title>
+      <link href="/2023/09/07/Map-Entry%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2023/09/07/Map-Entry%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Map-Entry学习和详解"><a href="#Map-Entry学习和详解" class="headerlink" title="Map.Entry学习和详解"></a>Map.Entry学习和详解</h1><h2 id="Map-Entry的定义"><a href="#Map-Entry的定义" class="headerlink" title="Map.Entry的定义"></a>Map.Entry的定义</h2><p>Map的entrySet()方法返回一个实现Map.Entry接口的对象集合。集合中每个对象都是底层Map中一个特定的键&#x2F;值对。通过这个集合的迭代器，获得每一个条目(唯一获取方式)的键或值并对值进行更改。Map.Entry中的常用方法如下所示：</p><ol><li>Object getKey(): 返回条目的关键字</li><li>Object getValue(): 返回条目的值</li><li>Object setValue(Object value): 将相关映像中的值改为value，并且返回旧值</li></ol><h2 id="Map-Entry的作用"><a href="#Map-Entry的作用" class="headerlink" title="Map.Entry的作用"></a>Map.Entry的作用</h2><p>Map.Entry是为了更方便的输出map键值对。一般情况下，要输出Map中的key 和 value  是先得到key的集合keySet()，然后再迭代（循环）由每个key得到每个value。values()方法是获取集合中的所有值，不包含键，没有对应关系。而Entry可以一次性获得这两个值。</p><p>常用的遍历Map的方法</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();  </span><br><span class="line">  map.put(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;value1&quot;</span>);  </span><br><span class="line">  map.put(<span class="string">&quot;2&quot;</span>, <span class="string">&quot;value2&quot;</span>);  </span><br><span class="line">  map.put(<span class="string">&quot;3&quot;</span>, <span class="string">&quot;value3&quot;</span>);  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">//第一种：普遍使用，由于二次取值,效率会比第二种和第三种慢一倍</span></span><br><span class="line">  System.out.println(<span class="string">&quot;通过Map.keySet遍历key和value：&quot;</span>);  </span><br><span class="line">  <span class="keyword">for</span> (String key : map.keySet()) &#123;  </span><br><span class="line">   System.out.println(<span class="string">&quot;key= &quot;</span>+ key + <span class="string">&quot; and value= &quot;</span> + map.get(key));  </span><br><span class="line">  &#125;  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">//第二种  </span></span><br><span class="line">  System.out.println(<span class="string">&quot;通过Map.entrySet使用iterator遍历key和value：&quot;</span>);  </span><br><span class="line">  Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();  </span><br><span class="line">  <span class="keyword">while</span> (it.hasNext()) &#123;  </span><br><span class="line">   Map.Entry&lt;String, String&gt; entry = it.next();  </span><br><span class="line">   System.out.println(<span class="string">&quot;key= &quot;</span> + entry.getKey() + <span class="string">&quot; and value= &quot;</span> + entry.getValue());  </span><br><span class="line">  &#125;  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">//第三种：无法在for循环时实现remove等操作  </span></span><br><span class="line">  System.out.println(<span class="string">&quot;通过Map.entrySet遍历key和value&quot;</span>);  </span><br><span class="line">  <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;  </span><br><span class="line">   System.out.println(<span class="string">&quot;key= &quot;</span> + entry.getKey() + <span class="string">&quot; and value= &quot;</span> + entry.getValue());  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="comment">//第四种：只能获取values,不能获取key </span></span><br><span class="line">  System.out.println(<span class="string">&quot;通过Map.values()遍历所有的value，但不能遍历key&quot;</span>);  </span><br><span class="line">  <span class="keyword">for</span> (String v : map.values()) &#123;  </span><br><span class="line">   System.out.println(<span class="string">&quot;value= &quot;</span> + v);  </span><br><span class="line">  &#125; </span><br></pre></td></tr></table></figure><p>​    </p><p>Map.entrySet迭代器会生成EntryIterator,其返回的实例是一个包含key&#x2F;value键值对的对象。而keySet中迭代器返回的只是key对象，还需要到map中二次取值。故entrySet要比keySet快一倍左右。</p><p>原文链接：<a href="https://blog.csdn.net/songfeihu0810232/article/details/80156626">https://blog.csdn.net/songfeihu0810232/article/details/80156626</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> tips </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaSE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>有哪些集合是线程不安全的？怎么解决呢？</title>
       <link href="/2023/09/06/%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%91%A2%EF%BC%9F/"/>
       <url>/2023/09/06/%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%91%A2%EF%BC%9F/</url>
       
-        <content type="html"><![CDATA[<h1 id="有哪些集合是线程不安全的？怎么解决呢？"><a href="#有哪些集合是线程不安全的？怎么解决呢？" class="headerlink" title="有哪些集合是线程不安全的？怎么解决呢？"></a>有哪些集合是线程不安全的？怎么解决呢？</h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="有哪些集合是线程不安全的？怎么解决呢？"><a href="#有哪些集合是线程不安全的？怎么解决呢？" class="headerlink" title="有哪些集合是线程不安全的？怎么解决呢？"></a>有哪些集合是线程不安全的？怎么解决呢？</h1><h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><h3 id="ArrayList线程不安全"><a href="#ArrayList线程不安全" class="headerlink" title="ArrayList线程不安全"></a>ArrayList线程不安全</h3><p>例如</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">        list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;, String.valueOf(i)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://picst.sunbangyan.cn/2023/09/07/10t08nt.png"></p><h3 id="如何解决ArrayList线程不安全"><a href="#如何解决ArrayList线程不安全" class="headerlink" title="如何解决ArrayList线程不安全"></a>如何解决ArrayList线程不安全</h3><ol><li>使用Vector</li><li>使用Collections.synchronizeList()</li><li>使用CopyOnWriteArrayList()</li></ol><h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>Vector为什么能够解决线程不安全呢？Vector底层采用的是加锁的方式，加锁数据的一致性可以保证，但并发性会大大降低。</p><p><img src="https://picdl.sunbangyan.cn/2023/09/07/10vd6fc.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">Vector</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">        list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;, String.valueOf(i)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="Collections-synchronizeList"><a href="#Collections-synchronizeList" class="headerlink" title="Collections.synchronizeList()"></a>Collections.synchronizeList()</h4><p>首先来说一下Collection和Collections的区别</p><ol><li>Collection是一个接口，Set接口和List接口都继承自此接口</li><li>Collections是一个类，一个辅助工具类，可以使不安全的集合类变为安全的。</li></ol><p>来看看这个类：</p><p><img src="https://picdm.sunbangyan.cn/2023/09/07/10xq7j8.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Collections.synchronizedList(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">                list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">                System.out.println(list);</span><br><span class="line">            &#125;, String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList()"></a>CopyOnWriteArrayList()</h4><p>CopyOnWriteArrayList是JUC包下的一个类。写时复制基于读写分离的思想</p><p><img src="https://picdm.sunbangyan.cn/2023/09/07/10z04vo.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">        list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;, String.valueOf(i)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="LinkedList线程不安全"><a href="#LinkedList线程不安全" class="headerlink" title="LinkedList线程不安全"></a>LinkedList线程不安全</h3><ol><li>使用Collections.synchronizeList()</li></ol><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h3 id="HashSet线程不安全"><a href="#HashSet线程不安全" class="headerlink" title="HashSet线程不安全"></a>HashSet线程不安全</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">                set.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">                System.out.println(set);</span><br><span class="line">            &#125;, String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><p><img src="https://picss.sunbangyan.cn/2023/09/07/113gqe0.png"></p><h3 id="如何解决HashSet线程不安全"><a href="#如何解决HashSet线程不安全" class="headerlink" title="如何解决HashSet线程不安全"></a>如何解决HashSet线程不安全</h3><ol><li><p>使用Collections.synchronizeList()</p></li><li><p>CopyOnWriteHashSet</p></li></ol><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="HashMap线程不安全"><a href="#HashMap线程不安全" class="headerlink" title="HashMap线程不安全"></a>HashMap线程不安全</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Integer i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">finalI</span> <span class="operator">=</span> i;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">        map.put(String.valueOf(finalI), UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;, String.valueOf(i)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://picss.sunbangyan.cn/2023/09/07/118a2i4.png"></p><h3 id="如何解决HashMap线程不安全"><a href="#如何解决HashMap线程不安全" class="headerlink" title="如何解决HashMap线程不安全"></a>如何解决HashMap线程不安全</h3><ol><li><p>HashTable</p></li><li><p>Collections.synchronizedMap</p></li><li><p>ConcurrentHashMap</p></li></ol><h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; map = <span class="keyword">new</span> <span class="title class_">Hashtable</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Integer i=<span class="number">0</span>;i&lt;=<span class="number">500</span>;i++)&#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">finalI</span> <span class="operator">=</span> i;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">        map.put(String.valueOf(finalI), UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;, String.valueOf(i)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://picdl.sunbangyan.cn/2023/09/07/11anpnr.png"></p>]]></content>
       
       
       <categories>
