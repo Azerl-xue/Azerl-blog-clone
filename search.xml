@@ -4,6 +4,366 @@
   
     
     <entry>
+      <title>Spring Boot ⽀持哪些嵌⼊式 web 容器？</title>
+      <link href="/2023/09/11/Spring-Boot-%E2%BD%80%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B5%8C%E2%BC%8A%E5%BC%8F-web-%E5%AE%B9%E5%99%A8%EF%BC%9F/"/>
+      <url>/2023/09/11/Spring-Boot-%E2%BD%80%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B5%8C%E2%BC%8A%E5%BC%8F-web-%E5%AE%B9%E5%99%A8%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Boot-⽀持哪些嵌⼊式-web-容器？"><a href="#Spring-Boot-⽀持哪些嵌⼊式-web-容器？" class="headerlink" title="Spring Boot ⽀持哪些嵌⼊式 web 容器？"></a>Spring Boot ⽀持哪些嵌⼊式 web 容器？</h1><p>Spring Boot 支持以下嵌入式 Web 容器¹:</p><ol><li><p><strong>Tomcat</strong>: Tomcat 是一个流行的开源 Web 服务器，由 Apache 软件基金会开发和维护。Spring Boot 默认使用 Tomcat 作为嵌入式 Web 容器¹.</p></li><li><p><strong>Jetty</strong>: Jetty 是另一个流行的开源 Web 服务器，由 Eclipse 基金会开发和维护。Spring Boot 也支持使用 Jetty 作为嵌入式 Web 容器¹.</p></li><li><p><strong>Undertow</strong>: Undertow 是一个轻量级的 Web 服务器，由 JBoss 开发和维护。Spring Boot 也支持使用 Undertow 作为嵌入式 Web 容器¹.</p></li><li><p><strong>Netty</strong>: Netty 是一个高性能的异步事件驱动的网络应用程序框架，由 JBoss 开发和维护。Spring Boot 也支持使用 Netty 作为嵌入式 Web 容器¹.</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring Boot 的⾃动配置是如何实现的?</title>
+      <link href="/2023/09/11/Spring-Boot-%E7%9A%84%E2%BE%83%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/"/>
+      <url>/2023/09/11/Spring-Boot-%E7%9A%84%E2%BE%83%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Boot-的⾃动配置是如何实现的"><a href="#Spring-Boot-的⾃动配置是如何实现的" class="headerlink" title="Spring Boot 的⾃动配置是如何实现的?"></a>Spring Boot 的⾃动配置是如何实现的?</h1><p>Spring Boot 的自动配置是通过 <code>@EnableAutoConfiguration</code> 注解实现的¹. 这个注解可以帮助我们自动载入应用程序所需要的所有默认配置。它通过条件化配置实现，这意味着只有在特定条件下才会应用这些配置⁴. </p><p>在启动 Spring Boot 应用程序时，<code>@EnableAutoConfiguration</code> 注解会扫描 classpath 下的 <code>META-INF/spring.factories</code> 文件，将其包装成 Properties 对象，并从中获取 key 值为 <code>EnableAutoConfiguration</code> 的数据，然后添加到容器中²³. 这些配置信息是从 Spring Boot 的依赖关系和配置信息中获取的，它们可以帮助我们自动配置应用程序所需的 Spring Bean⁴.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>介绍一下 @SpringBootApplication 注解。</title>
+      <link href="/2023/09/11/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-SpringBootApplication-%E6%B3%A8%E8%A7%A3%E3%80%82/"/>
+      <url>/2023/09/11/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-SpringBootApplication-%E6%B3%A8%E8%A7%A3%E3%80%82/</url>
+      
+        <content type="html"><![CDATA[<p><code>@SpringBootApplication</code> 是一个组合注解，它包含了以下三个注解：</p><ol><li><code>@SpringBootConfiguration</code>: 标记当前类为 Spring Boot 的配置类。</li><li><code>@EnableAutoConfiguration</code>: 开启 Spring Boot 的自动配置功能。</li><li><code>@ComponentScan</code>: 自动扫描并加载符合条件的组件或 bean 定义。</li></ol><p><code>@SpringBootApplication</code> 注解的主要作用是开启 Spring Boot 的自动配置功能，从而简化 Spring 应用程序的开发和部署。它还可以帮助开发人员快速构建独立的 Spring 应用程序，内嵌 Tomcat、Jetty 和 Undertow 服务器，并通过依赖启动器简化构建配置。同时，它还提供了生产就绪功能，例如指标、监控检查和外部化配置等¹。</p><p>希望这能帮助你更好地理解 <code>@SpringBootApplication</code> 注解。</p><p>源: 与必应的对话， 2023&#x2F;9&#x2F;11<br>(1) SpringBootApplication核心注解 - 知乎. <a href="https://zhuanlan.zhihu.com/p/159483797">https://zhuanlan.zhihu.com/p/159483797</a>.<br>(2) springboot中的springbootApplication注解有什么作用？ - CSDN博客. <a href="https://blog.csdn.net/weixin_45617512/article/details/107942565">https://blog.csdn.net/weixin_45617512/article/details/107942565</a>.<br>(3) springboot中@SpringBootApplication注解的作用是什么 - 大数据 - 亿速云. <a href="https://www.yisu.com/zixun/596508.html">https://www.yisu.com/zixun/596508.html</a>.<br>(4) @SpringBootApplication用法 - 简书. <a href="https://www.jianshu.com/p/7703054f1c1f">https://www.jianshu.com/p/7703054f1c1f</a>.<br>(5) @SpringBootApplication详解 - CSDN博客. <a href="https://blog.csdn.net/qq_46658171/article/details/119808608">https://blog.csdn.net/qq_46658171/article/details/119808608</a>.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什么是 Spring Boot Starter?</title>
+      <link href="/2023/09/11/%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Boot-Starter/"/>
+      <url>/2023/09/11/%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Boot-Starter/</url>
+      
+        <content type="html"><![CDATA[<h1 id="什么是-Spring-Boot-Starter"><a href="#什么是-Spring-Boot-Starter" class="headerlink" title="什么是 Spring Boot Starter?"></a>什么是 Spring Boot Starter?</h1><p>Spring Boot Starter 是 Spring Boot 框架提供的一种便捷的依赖管理方式¹. 它是一组预定义的依赖项，可以帮助开发人员快速构建 Spring 应用程序². Starter 通常命名遵循的格式为 <code>spring-boot-starter-&#123;name&#125;</code>，例如 <code>spring-boot-starter-data-mongodb</code>². </p><p>Spring Boot Starter 通过自动配置和自动装配来简化 Spring 应用程序的开发¹. 它提供了各种场景依赖启动器，并默认提供了各种自动化配置类。使用 Spring Boot Starter 开发项目时，一旦引入了某个场景的依赖启动器，Spring Boot 内部提供的默认自动化配置类就会生效，从而极大减少了开发人员的工作量².</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>说出使⽤ Spring Boot 的主要优点</title>
+      <link href="/2023/09/11/%E8%AF%B4%E5%87%BA%E4%BD%BF%E2%BD%A4-Spring-Boot-%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9/"/>
+      <url>/2023/09/11/%E8%AF%B4%E5%87%BA%E4%BD%BF%E2%BD%A4-Spring-Boot-%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使⽤-Spring-Boot-的主要优点"><a href="#使⽤-Spring-Boot-的主要优点" class="headerlink" title="使⽤ Spring Boot 的主要优点"></a>使⽤ Spring Boot 的主要优点</h1><p>Spring Boot 是一个基于 Spring 框架的扩展，它旨在简化 Spring 应用程序的开发和部署¹. Spring Boot 具有以下主要优点：</p><ol><li><p><strong>快速构建独立的 Spring 应用</strong>：Spring Boot 依靠大量注解实现自动化配置，只需要添加相应的场景依赖，就可以快速构建出一个独立的 Spring 应用程序².</p></li><li><p><strong>内嵌 Tomcat、Jetty 和 Undertow 服务器</strong>：Spring Boot 框架内嵌了 Tomcat、Jetty 和 Undertow 服务器，无需部署 WAR 文件².</p></li><li><p><strong>通过依赖启动器简化构建配置</strong>：在 Spring Boot 项目构建过程中，只需在构建项目时根据开发场景需求选择对应的依赖启动器 “starter”，就可以自动下载和拉取相关 JAR 包².</p></li><li><p><strong>自动化配置 Spring 和第三方库</strong>：Spring Boot 提供了各种场景依赖启动器，并默认提供了各种自动化配置类。使用 Spring Boot 开发项目时，一旦引入了某个场景的依赖启动器，Spring Boot 内部提供的默认自动化配置类就会生效，从而极大减少了开发人员的工作量².</p></li><li><p><strong>提供生产就绪功能</strong>：Spring Boot 提供了一些用于生产环境运行时的特性，例如指标、监控检查和外部化配置。其中，指标和监控检查可以帮助运维人员在运维期间监控项目运行情况；外部化配置可以使运维人员快速、方便地进行外部化配置和部署工作³.</p></li><li><p><strong>极少的代码生成和 XML 配置</strong>：Spring Boot 框架内部已经实现了与 Spring 以及其他常用第三方库的整合连接，并提供了默认最优化的整合配置，使用时基本上不需要额外生成配置代码和 XML 配置文件。在需要自定义配置的情况下，Spring Boot 更加提倡使用 Java config (Java 配置类) 替换传统的 XML 配置方式³.</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring Boot 和 Spring 的区别</title>
+      <link href="/2023/09/11/Spring-Boot-%E5%92%8C-Spring-%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+      <url>/2023/09/11/Spring-Boot-%E5%92%8C-Spring-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Boot-和-Spring-的区别"><a href="#Spring-Boot-和-Spring-的区别" class="headerlink" title="Spring Boot 和 Spring 的区别"></a>Spring Boot 和 Spring 的区别</h1><p>Spring 框架是一个轻量级的 Java 开发框架，旨在解决企业应用程序开发的复杂性¹。它是一个分层的 JavaSE&#x2F;EE full-stack (一站式) 轻量级开源框架，以控制反转（IoC）和面向切面编程（AOP）为核心¹。Spring 框架提供了许多功能，包括但不限于：</p><ul><li>依赖注入（DI）：通过容器动态地将某个依赖关系注入到组件之中。</li><li>面向切面编程（AOP）：通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。</li><li>JDBC 抽象层：提供了有意义的异常层次结构，可用该结构来管理异常处理和不同数据库供应商抛出的错误消息。</li><li>对主流的框架提供了很好的集成支持，如 Hibernate、Struts2、JPA 等。</li><li>Spring MVC 框架：是一个全功能的构建 Web 应用程序的 MVC 框架。</li></ul><p>Spring Boot 是 Spring 框架的扩展，它旨在简化 Spring 应用程序的开发和部署。Spring Boot 可以自动配置 Spring 应用程序，并提供了一些常用库和依赖项，如 Tomcat、Jackson、Spring Data JPA 等。相比于传统的 Spring 应用程序，Spring Boot 应用程序可以更快地启动并运行¹。</p><p>总体而言，Spring Boot 是 Spring 框架的补充和扩展，它消除了 Spring 应用程序所需的 XML 配置文件，并提供了更快、更高效的开发生态系统¹.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hibernate 和 mybatis 区别</title>
+      <link href="/2023/09/11/hibernate-%E5%92%8C-mybatis-%E5%8C%BA%E5%88%AB/"/>
+      <url>/2023/09/11/hibernate-%E5%92%8C-mybatis-%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="hibernate-和-mybatis-区别"><a href="#hibernate-和-mybatis-区别" class="headerlink" title="hibernate 和 mybatis 区别"></a>hibernate 和 mybatis 区别</h1><p>Hibernate 和 MyBatis 都是 Java 中常用的 ORM（对象关系映射）框架，但它们的实现方式和使用场景略有不同.</p><p>Hibernate 是一个全功能的 ORM 框架，它将 Java 类映射到数据库表，并提供了一种自定义查询语言（HQL 或 EJB QL） Hibernate 通过缓存、延迟初始化等技术实现高性能2. Hibernate 还提供了自动生成表的功能，无需手动编写 SQL 语句.</p><p>MyBatis 是一个轻量级的持久化框架，它将 SQL 语句映射到 Java 方法  MyBatis 强调使用 SQL 语句，而不是像 Hibernate 等其他 ORM 框架一样使用自定义查询语言. MyBatis 可以与 Spring 框架集成.</p><p>总体而言，Hibernate 更适合处理复杂的业务逻辑和大型应用程序，而 MyBatis 更适合处理简单的 CRUD（增删改查）操作和小型应用程序。此外，Hibernate 支持基于接口和 CGLib 的动态代理，而 MyBatis 默认使用基于接口的 JDK 动态代理.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring 动态代理默认⽤哪⼀种</title>
+      <link href="/2023/09/11/Spring-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E9%BB%98%E8%AE%A4%E2%BD%A4%E5%93%AA%E2%BC%80%E7%A7%8D/"/>
+      <url>/2023/09/11/Spring-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E9%BB%98%E8%AE%A4%E2%BD%A4%E5%93%AA%E2%BC%80%E7%A7%8D/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-动态代理默认⽤哪⼀种"><a href="#Spring-动态代理默认⽤哪⼀种" class="headerlink" title="Spring 动态代理默认⽤哪⼀种"></a>Spring 动态代理默认⽤哪⼀种</h1><p>Spring 框架默认使用 基于接口的 JDK 动态代理1。如果目标对象实现了至少一个接口，则 Spring 会使用 JDK 动态代理。否则，Spring 将使用 CGLib 动态代理</p><h2 id="CGLib-动态代理"><a href="#CGLib-动态代理" class="headerlink" title="CGLib 动态代理"></a>CGLib 动态代理</h2><p>CGLIB (Code Generation Library) 是一个基于 ASM 的字节码生成库，它允许我们在运行时对字节码进行修改和动态生成。CGLIB 动态代理是针对类来实现代理的，它的原理是对指定的目标类生成一个子类，并覆盖其中方法实现增强。相比 JDK 自带的动态代理，CGLIB 动态代理无需目标对象实现接口，因此可以为任何类创建代理对象。CGLIB 底层使用 ASM（一个 Java 字节码操纵框架）操作字节码数组来实现类代理。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>拦截器和过滤器了解么？</title>
+      <link href="/2023/09/11/%E6%8B%A6%E6%88%AA%E5%99%A8%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E4%BA%86%E8%A7%A3%E4%B9%88%EF%BC%9F/"/>
+      <url>/2023/09/11/%E6%8B%A6%E6%88%AA%E5%99%A8%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E4%BA%86%E8%A7%A3%E4%B9%88%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="拦截器和过滤器了解么？"><a href="#拦截器和过滤器了解么？" class="headerlink" title="拦截器和过滤器了解么？"></a>拦截器和过滤器了解么？</h1><p>过滤器和拦截器都是 AOP（面向切面编程）的实现方式，但它们的底层实现方式不同。</p><p>过滤器是基于函数回调的，而拦截器则是基于 Java 的反射机制（动态代理）实现的。</p><p>这意味着过滤器依赖于 Servlet 容器，而拦截器不依赖于 Servlet 容器。</p><p>过滤器可以对几乎所有的请求起作用，包括 CSS、JS 等资源文件。它们可以在请求到达服务器之前或之后执行某些操作。过滤器通常用于处理请求参数、字符编码、日志记录等。</p><p>拦截器只对 action 请求起作用，即对外访问路径。一个应用中可以同时存在多个拦截器，一个请求也可以触发多个拦截器，而每个拦截器的调用会依据它的声明顺序依次执行。拦截器通常用于权限验证、日志记录等。</p><p>希望这能帮助你更好地理解拦截器和过滤器之间的区别。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring Bean 的作用域以及⽣命周期</title>
+      <link href="/2023/09/11/Spring-Bean-%E7%9A%84%E2%BD%A3%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%B4%E2%BC%80%E4%B8%8B/"/>
+      <url>/2023/09/11/Spring-Bean-%E7%9A%84%E2%BD%A3%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%B4%E2%BC%80%E4%B8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-Bean-的作用域以及⽣命周期"><a href="#Spring-Bean-的作用域以及⽣命周期" class="headerlink" title="Spring Bean 的作用域以及⽣命周期"></a>Spring Bean 的作用域以及⽣命周期</h1><p><strong>什么是Bean</strong></p><p>bean 是由 Spring IoC 容器实例化、组装和管理的对象。</p><p><strong>Spring 中的 bean 的作用域有哪些?</strong></p><ul><li>singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。</li><li>prototype : 每次请求都会创建一个新的 bean 实例。</li><li>request : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。</li><li>session : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。</li><li>global-session： 全局 session 作用域，仅仅在基于 Portlet 的 web 应用中才有意义，Spring5 已经没有了。Portlet 是能够生成语义代码（例如：HTML）片段的小型 Java Web 插件。它们基于 portlet 容器，可以像 servlet 一样处理 HTTP 请求。但是，与 servlet 不同，每个 portlet 都有不同的会话。</li></ul><p><strong>Spring Bean 的生命周期：</strong></p><ul><li>实例化 Instantiation</li><li>属性赋值 Populate</li><li>初始化 Initialization</li><li>销毁 Destruction</li></ul><p>实例化 -&gt; 属性赋值 -&gt; 初始化 -&gt; 销毁</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>谈谈⾃⼰对于 Spring IoC 和 AOP 的理解</title>
+      <link href="/2023/09/11/%E8%B0%88%E8%B0%88%E2%BE%83%E2%BC%B0%E5%AF%B9%E4%BA%8E-Spring-IoC-%E5%92%8C-AOP-%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+      <url>/2023/09/11/%E8%B0%88%E8%B0%88%E2%BE%83%E2%BC%B0%E5%AF%B9%E4%BA%8E-Spring-IoC-%E5%92%8C-AOP-%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="谈谈⾃⼰对于-Spring-IoC-和-AOP-的理解"><a href="#谈谈⾃⼰对于-Spring-IoC-和-AOP-的理解" class="headerlink" title="谈谈⾃⼰对于 Spring IoC 和 AOP 的理解"></a>谈谈⾃⼰对于 Spring IoC 和 AOP 的理解</h1><p>Spring 框架是一个分层的 JavaSE&#x2F;EE full-stack（一站式）轻量级开源框架。其中，核心容器提供 Spring 框架的基本功能，包括 BeanFactory 和 ApplicationContext 等组件。Spring 的核心是控制反转（IoC）和面向切面（AOP）</p><p>控制反转（IoC）是一种设计模式，它将对象的创建、初始化、销毁等操作交给 Spring 容器来管理，而不是由开发者控制，实现了对象的解耦。Spring IoC 容器底层就是对象工厂（BeanFactory 接口），它通过 xml 解析、工厂设计模式、反射等技术实现。使用 IoC 可以降低代码的耦合度，提高代码的可重用性和可维护性</p><p>面向切面编程（AOP）是一种编程思想，它将程序中的业务逻辑和系统服务分离开来，通过预编译方式和运行期动态代理实现系统服务的统一管理Spring AOP 是 Spring 框架中的一个重要组成部分，它通过动态代理技术实现了 AOP 的功能Spring AOP 的主要作用是在不修改原有代码的情况下，为程序添加新的功能</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什么是 Spring 框架,列举⼀些重要的 Spring 模块？</title>
+      <link href="/2023/09/11/%E4%BB%80%E4%B9%88%E6%98%AF-Spring-%E6%A1%86%E6%9E%B6-%E5%88%97%E4%B8%BE%E2%BC%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84-Spring-%E6%A8%A1%E5%9D%97%EF%BC%9F/"/>
+      <url>/2023/09/11/%E4%BB%80%E4%B9%88%E6%98%AF-Spring-%E6%A1%86%E6%9E%B6-%E5%88%97%E4%B8%BE%E2%BC%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84-Spring-%E6%A8%A1%E5%9D%97%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="什么是-Spring-框架-列举⼀些重要的-Spring-模块？"><a href="#什么是-Spring-框架-列举⼀些重要的-Spring-模块？" class="headerlink" title="什么是 Spring 框架,列举⼀些重要的 Spring 模块？"></a>什么是 Spring 框架,列举⼀些重要的 Spring 模块？</h1><p><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">Spring 是一个开源框架，是为了解决企业应用程序开发复杂性而创建的</a><a href="https://zhuanlan.zhihu.com/p/56100723">1</a><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">。它是一个分层的 JavaSE&#x2F;EE full-stack (一站式) 轻量级开源框架</a><a href="https://zhuanlan.zhihu.com/p/56100723">1</a><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">。Spring 的核心是控制反转（IoC）和面向切面（AOP）</a><a href="https://zhuanlan.zhihu.com/p/56100723">1</a><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">。简单来说，Spring 是一个分层的 JavaSE&#x2F;EE full-stack (一站式) 轻量级开源框架</a><a href="https://zhuanlan.zhihu.com/p/56100723">1</a><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">。Spring 的主要优势之一就是其分层架构，分层架构允许您选择使用哪一个组件，同时为 J2EE 应用程序开发提供集成的框架</a><a href="https://zhuanlan.zhihu.com/p/56100723"></a>。</p><p><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">Spring 框架是一个分层架构，由 7 个定义良好的模块组成</a><a href="https://zhuanlan.zhihu.com/p/56100723">1</a><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">。这些模块分为 Core Container、Data Access&#x2F;Integration、Web、AOP (Aspect Oriented Programming)、Instrumentation 和测试部分</a><a href="https://zhuanlan.zhihu.com/p/40300991">2</a>。每个模块的功能如下：</p><table><thead><tr><th align="left"><strong>模块</strong></th><th align="left"><strong>功能</strong></th></tr></thead><tbody><tr><td align="left">核心容器</td><td align="left">核心容器提供 Spring 框架的基本功能。 核心容器的主要组件是 BeanFactory，它是工厂模式的实现。 BeanFactory 使用控制反转 （IOC） 模式将应用程序的配置和依赖性规范与实际的应用程序代码分开。</td></tr><tr><td align="left">Spring 上下文</td><td align="left">Spring 上下文是一个配置文件，向 Spring 框架提供上下文信息。 Spring 上下文包括企业服务，例如 JNDI、EJB、电子邮件、国际化、校验和调度功能。</td></tr><tr><td align="left">Spring AOP</td><td align="left">通过配置管理特性，Spring AOP 模块直接将面向方面的编程功能集成到了 Spring 框架中。 所以，可以很容易地使 Spring 框架管理的任何对象支持 AOP。 Spring AOP 模块为基于 Spring 的应用程序中的对象提供了事务管理服务。 通过使用 Spring AOP，不用依赖 EJB 组件，就可以将声明性事务管理集成到应用程序中。</td></tr><tr><td align="left">Spring DAO</td><td align="left">JDBC DAO 抽象层提供了有意义的异常层次结构，可用该结构来管理异常处理和不同数据库供应商抛出的错误消息。 异常层次结构简化了错误处理，并且极大地降低了需要编写的异常代码数量（例如打开和关闭连接）。 Spring DAO 的面向 JDBC 的异常遵从通用的 DAO 异常层次结构。</td></tr><tr><td align="left">Spring ORM</td><td align="left">Spring 框架插入了若干个 ORM 框架，从而提供了 ORM 的对象关系工具，其中包括 JDO、Hibernate 和 iBatis SQL Map。 所有这些都遵从 Spring 的通用事务和 DAO 异常层次结构。</td></tr><tr><td align="left">Spring Web 模块</td><td align="left">Web 上下文模块建立在应用程序上下文模块之上，为基于 Web 的应用程序提供了上下文。 所以，Spring 框架支持与 Jakarta Struts 的集成。 Web 模块还简化了处理多部分请求以及将请求参数绑定到域对象的工作。</td></tr><tr><td align="left">Spring MVC 框架</td><td align="left"><a href="https://www.bing.com/search?q=%E4%BB%80%E4%B9%88%E6%98%AF+Spring+%E6%A1%86%E6%9E%B6?&form=ANNTH1&refig=64ff001bb0e849d5b3615c715ef05e19#">MVC 框架是一个全功能的构建 Web 应用程序的 MVC 实现。 通过策略接口，MVC 框架变成为高度可配置的，MVC 容纳了大量视图技术，其中包括 JSP、Velocity、Tiles、iText 和 POI </a><a href="https://zhuanlan.zhihu.com/p/40300991">2</a>。</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java中Enumeration接口的用法</title>
       <link href="/2023/09/08/Java%E4%B8%ADEnumeration%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%94%A8%E6%B3%95/"/>
       <url>/2023/09/08/Java%E4%B8%ADEnumeration%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%94%A8%E6%B3%95/</url>
