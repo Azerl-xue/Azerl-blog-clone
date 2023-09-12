@@ -4,6 +4,46 @@
   
     
     <entry>
+      <title>消息队列有哪些应用场景</title>
+      <link href="/2023/09/12/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+      <url>/2023/09/12/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="消息队列有哪些应用场景"><a href="#消息队列有哪些应用场景" class="headerlink" title="消息队列有哪些应用场景"></a>消息队列有哪些应用场景</h1><ol><li><strong>异步处理</strong></li><li>应用解耦</li><li>流量削锋</li><li><strong>日志处理</strong></li><li>消息通讯</li></ol><p>具体内容参考：</p><p><a href="https://zhuanlan.zhihu.com/p/55712984">消息队列使用的四种场景介绍，有图有解析，一看就懂 - 知乎 (zhihu.com)</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> MQ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什么是线程安全？如何保证线程安全</title>
+      <link href="/2023/09/12/%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
+      <url>/2023/09/12/%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring Boot ⽀持哪些嵌⼊式 web 容器？</title>
       <link href="/2023/09/11/Spring-Boot-%E2%BD%80%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B5%8C%E2%BC%8A%E5%BC%8F-web-%E5%AE%B9%E5%99%A8%EF%BC%9F/"/>
       <url>/2023/09/11/Spring-Boot-%E2%BD%80%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B5%8C%E2%BC%8A%E5%BC%8F-web-%E5%AE%B9%E5%99%A8%EF%BC%9F/</url>
