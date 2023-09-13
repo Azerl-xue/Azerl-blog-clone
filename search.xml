@@ -4,6 +4,251 @@
   
     
     <entry>
+      <title>注解继承问题</title>
+      <link href="/2023/09/13/%E6%B3%A8%E8%A7%A3%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/09/13/%E6%B3%A8%E8%A7%A3%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="注解继承问题"><a href="#注解继承问题" class="headerlink" title="注解继承问题"></a>注解继承问题</h1><p>在Java中，注解不支持继承。这意味着如果您在父类上使用了注解，它们不会自动被子类继承，子类需要显式地重新声明这些注解才能使用它们。</p><p>考虑以下示例，有一个父类和一个子类：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ParentClass</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ChildClass</span> <span class="keyword">extends</span> <span class="title class_">ParentClass</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在这个示例中，<code>ParentClass</code>上使用了<code>@MyAnnotation</code>注解。但是，如果您在<code>ChildClass</code>上使用<code>@MyAnnotation</code>，它不会自动继承自<code>ParentClass</code>，因为Java注解不支持继承。</p><p>要在子类上使用相同的注解，您需要在子类上重新声明它：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ChildClass</span> <span class="keyword">extends</span> <span class="title class_">ParentClass</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样，<code>ChildClass</code>上就会有<code>@MyAnnotation</code>注解了。注解的继承行为不同于类的继承，注解需要在每个具体的类上显式地声明。如果您希望多个类都使用相同的注解，可以在这些类上分别添加相同的注解，或者将注解应用于一个通用的父类或接口，然后让多个类继承这个父类或实现这个接口。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Mybatis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mybatis 的分页</title>
+      <link href="/2023/09/13/Mybatis-%E7%9A%84%E5%88%86%E9%A1%B5/"/>
+      <url>/2023/09/13/Mybatis-%E7%9A%84%E5%88%86%E9%A1%B5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Mybatis-的分页"><a href="#Mybatis-的分页" class="headerlink" title="Mybatis 的分页"></a>Mybatis 的分页</h1><p>MyBatis提供了一种方便的方式来执行分页查询操作，通常通过SQL语句的<code>LIMIT</code>（在MySQL等数据库中）或<code>ROWNUM</code>（在Oracle等数据库中）来实现分页。以下是使用MyBatis进行分页查询的基本步骤：</p><ol><li><p><strong>编写SQL语句：</strong> 在SQL查询语句中，使用适当的数据库特定语法来实现分页。例如，在MySQL中，您可以使用<code>LIMIT</code>子句来限制返回的结果集的行数。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> your_table LIMIT #&#123;<span class="keyword">start</span>&#125;, #&#123;pageSize&#125;</span><br></pre></td></tr></table></figure><p>这里的<code>#&#123;start&#125;</code>是分页的起始位置，<code>#&#123;pageSize&#125;</code>是每页的记录数。</p></li><li><p><strong>在Mapper文件中定义方法：</strong> 在MyBatis的Mapper文件中，定义一个用于执行分页查询的方法，并将起始位置和每页大小作为参数传递给SQL语句。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByPage&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;map&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;YourEntity&quot;</span>&gt;</span></span><br><span class="line">    SELECT * FROM your_table LIMIT #&#123;start&#125;, #&#123;pageSize&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p><strong>在Java代码中调用方法：</strong> 在Java代码中调用上述定义的方法，并传递合适的参数。通常，您需要计算起始位置和每页大小，并将它们包装在一个Map或POJO中传递给方法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; params = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">params.put(<span class="string">&quot;start&quot;</span>, (pageNo - <span class="number">1</span>) * pageSize); <span class="comment">// 计算起始位置</span></span><br><span class="line">params.put(<span class="string">&quot;pageSize&quot;</span>, pageSize);</span><br><span class="line">List&lt;YourEntity&gt; resultList = yourMapper.selectByPage(params);</span><br></pre></td></tr></table></figure></li><li><p><strong>处理分页结果：</strong> 获得查询结果后，您可以根据需要进行分页结果的处理和展示。</p></li></ol><p>这是一个简单的示例，实际上，您可能需要更多的逻辑来处理总记录数、处理异常情况等。此外，MyBatis也提供了一些插件和扩展来简化分页查询的处理。</p><p>注意事项：</p><ul><li>不同数据库支持不同的分页语法，因此您需要根据您使用的数据库类型来编写相应的分页SQL语句。</li><li>如果您使用的是MyBatis的扩展工具，如MyBatis-Plus，它们通常提供了更方便的分页查询方法，可以进一步简化分页操作。</li><li>在高并发的情况下，分页查询可能会导致性能问题。在需要大量分页查询的应用中，您可能需要考虑使用缓存、分页缓存或其他优化方法来减轻数据库的负载。</li></ul><h2 id="Mybatis-Plus"><a href="#Mybatis-Plus" class="headerlink" title="Mybatis Plus"></a>Mybatis Plus</h2><p>MyBatis-Plus（简称MP）是一个用于增强MyBatis功能的开源库，它提供了更简单的分页功能，以及其他方便的数据库操作功能。下面是如何使用MyBatis-Plus来进行分页查询的步骤：</p><ol><li><p><strong>引入MyBatis-Plus依赖：</strong> 首先，在您的项目中引入MyBatis-Plus的依赖，您可以在Maven或Gradle中添加以下依赖：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Maven 依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>最新版本<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p><strong>配置MyBatis-Plus：</strong> 在您的Spring Boot应用程序的配置文件中，配置MyBatis-Plus的相关属性，例如数据库连接信息和MyBatis-Plus的配置。</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据源配置</span></span><br><span class="line"><span class="attr">spring.datasource.url</span>=<span class="string">jdbc:mysql://localhost:3306/your_database</span></span><br><span class="line"><span class="attr">spring.datasource.username</span>=<span class="string">your_username</span></span><br><span class="line"><span class="attr">spring.datasource.password</span>=<span class="string">your_password</span></span><br><span class="line"><span class="attr">spring.datasource.driver-class-name</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># MyBatis-Plus配置</span></span><br><span class="line"><span class="attr">mybatis-plus.mapper-locations</span>=<span class="string">classpath:/mapper/**/*.xml</span></span><br><span class="line"><span class="attr">mybatis-plus.type-aliases-package</span>=<span class="string">com.example.model</span></span><br></pre></td></tr></table></figure><p>这里，您需要根据自己的数据库配置信息进行相应的更改。</p></li><li><p><strong>编写实体类：</strong> 在您的项目中创建实体类，该实体类用于表示数据库表的记录。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableName(&quot;your_table_name&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourEntity</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="comment">// 实体属性和对应的表字段</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>编写Mapper接口：</strong> 创建一个Mapper接口，继承自<code>BaseMapper</code>，并指定泛型为您的实体类。MyBatis-Plus会自动生成常见的数据库操作方法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">YourMapper</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;YourEntity&gt; &#123;</span><br><span class="line">    <span class="comment">// 这里可以添加自定义的查询方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>进行分页查询：</strong> 在需要进行分页查询的服务类或控制器中，注入您的Mapper，并使用MyBatis-Plus提供的分页方法来执行查询。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.plugins.pagination.Page;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> YourMapper yourMapper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Page&lt;YourEntity&gt; <span class="title function_">getEntitiesByPage</span><span class="params">(<span class="type">int</span> pageNo, <span class="type">int</span> pageSize)</span> &#123;</span><br><span class="line">        Page&lt;YourEntity&gt; page = <span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;(pageNo, pageSize);</span><br><span class="line">        QueryWrapper&lt;YourEntity&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 在queryWrapper中设置查询条件，如果不需要条件可以不设置</span></span><br><span class="line">        <span class="comment">// queryWrapper.eq(&quot;column_name&quot;, value);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> yourMapper.selectPage(page, queryWrapper);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>使用分页结果：</strong> 您可以在控制器或服务中使用返回的分页结果，例如将其传递给前端界面进行展示。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> YourService yourService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/entities&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">listEntities</span><span class="params">(<span class="meta">@RequestParam(defaultValue = &quot;1&quot;)</span> <span class="type">int</span> pageNo,</span></span><br><span class="line"><span class="params">                                <span class="meta">@RequestParam(defaultValue = &quot;10&quot;)</span> <span class="type">int</span> pageSize, Model model)</span> &#123;</span><br><span class="line">        Page&lt;YourEntity&gt; page = yourService.getEntitiesByPage(pageNo, pageSize);</span><br><span class="line">        model.addAttribute(<span class="string">&quot;page&quot;</span>, page);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;entity-list&quot;</span>; <span class="comment">// 返回视图页面</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><p>这就是使用MyBatis-Plus进行分页查询的基本步骤。MyBatis-Plus会自动处理分页查询并返回分页结果，大大简化了分页操作的代码编写和管理。根据您的需要，还可以使用其他MyBatis-Plus提供的功能，如条件构造器、代码生成器等，以更方便地管理数据库操作。</p><h2 id="Redis缓存分页结果"><a href="#Redis缓存分页结果" class="headerlink" title="Redis缓存分页结果"></a>Redis缓存分页结果</h2><p>如果您更喜欢使用Redis作为缓存库，那么您可以使用Redis来实现分页缓存功能。Redis是一个快速、高效的内存数据库，它可以用于缓存查询结果，从而提高应用程序的性能。以下是使用Redis来实现分页缓存的一般步骤：</p><ol><li><p><strong>引入Redis依赖：</strong> 首先，您需要在项目中引入Redis的依赖，以便在应用程序中使用Redis作为缓存存储。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Maven 依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p><strong>配置Redis连接：</strong> 在项目的配置文件中配置Redis的连接信息，包括主机、端口、密码等。具体的配置方式取决于您的项目和环境。</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Redis连接配置</span></span><br><span class="line"><span class="attr">spring.redis.host</span>=<span class="string">your_redis_host</span></span><br><span class="line"><span class="attr">spring.redis.port</span>=<span class="string">6379</span></span><br><span class="line"><span class="attr">spring.redis.password</span>=<span class="string">your_redis_password</span></span><br></pre></td></tr></table></figure></li><li><p><strong>使用Redis进行分页缓存：</strong> 在您的分页查询方法中使用Redis来存储和获取数据。通常，您可以使用Redis的<code>String</code>类型来存储分页查询结果。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YourService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> YourMapper yourMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Page&lt;YourEntity&gt; <span class="title function_">getEntitiesByPage</span><span class="params">(<span class="type">int</span> pageNo, <span class="type">int</span> pageSize)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">cacheKey</span> <span class="operator">=</span> <span class="string">&quot;pagedEntities:&quot;</span> + pageNo + <span class="string">&quot;-&quot;</span> + pageSize;</span><br><span class="line">        <span class="type">String</span> <span class="variable">cachedData</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(cacheKey);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cachedData != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 从缓存中获取数据</span></span><br><span class="line">            <span class="comment">// 这里需要解析缓存数据，并返回分页结果</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Page&lt;YourEntity&gt; page = <span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;(pageNo, pageSize);</span><br><span class="line">            QueryWrapper&lt;YourEntity&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">            <span class="comment">// 在queryWrapper中设置查询条件，如果不需要条件可以不设置</span></span><br><span class="line">            <span class="comment">// queryWrapper.eq(&quot;column_name&quot;, value);</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行数据库查询</span></span><br><span class="line">            page = yourMapper.selectPage(page, queryWrapper);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将查询结果存入缓存</span></span><br><span class="line">            stringRedisTemplate.opsForValue().set(cacheKey, serialize(page));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> page;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 序列化方法，将对象转换为字符串存入Redis</span></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">serialize</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">        <span class="comment">// 序列化逻辑，将对象转换为字符串</span></span><br><span class="line">        <span class="comment">// 例如使用JSON序列化工具</span></span><br><span class="line">        <span class="keyword">return</span> jsonSerialization(obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 反序列化方法，将字符串从Redis还原为对象</span></span><br><span class="line">    <span class="keyword">private</span> Object <span class="title function_">deserialize</span><span class="params">(String data)</span> &#123;</span><br><span class="line">        <span class="comment">// 反序列化逻辑，将字符串还原为对象</span></span><br><span class="line">        <span class="comment">// 例如使用JSON序列化工具</span></span><br><span class="line">        <span class="keyword">return</span> jsonDeserialization(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在上述示例中，我们使用了Spring的<code>StringRedisTemplate</code>来操作Redis中的字符串数据。首先，我们尝试从缓存中获取数据，如果缓存中存在数据，则直接返回缓存的分页结果；如果缓存中不存在数据，则执行数据库查询，将结果存入Redis缓存，并设置适当的缓存键（cacheKey）。</p><p>在<code>serialize</code>和<code>deserialize</code>方法中，您需要实现对象的序列化和反序列化逻辑，以便将对象转换为字符串存入Redis，并从字符串还原为对象。</p></li><li><p><strong>清除缓存（可选）：</strong> 类似于其他缓存库，您可能需要实现缓存的清除逻辑，以确保缓存中的数据保持最新。您可以使用Redis的<code>DEL</code>命令来删除缓存数据。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">clearPagedEntitiesCache</span><span class="params">(<span class="type">int</span> pageNo, <span class="type">int</span> pageSize)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">cacheKey</span> <span class="operator">=</span> <span class="string">&quot;pagedEntities:&quot;</span> + pageNo + <span class="string">&quot;-&quot;</span> + pageSize;</span><br><span class="line">    stringRedisTemplate.delete(cacheKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><p>这些步骤可以帮助您使用Redis来实现分页缓存功能。通过将分页查询结果存储在Redis中，您可以显著提高查询性能和降低数据库负载。根据项目需求，您还可以进一步优化缓存策略，例如设置缓存的过期时间、实现缓存的自动刷新等。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Mybatis </tag>
+            
+            <tag> Mybatis Plus </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring 中事务失效的几种原因</title>
+      <link href="/2023/09/13/Spring-%E4%B8%AD%E4%BA%8B%E5%8A%A1%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8E%9F%E5%9B%A0/"/>
+      <url>/2023/09/13/Spring-%E4%B8%AD%E4%BA%8B%E5%8A%A1%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8E%9F%E5%9B%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-中事务失效的几种原因"><a href="#Spring-中事务失效的几种原因" class="headerlink" title="Spring 中事务失效的几种原因"></a>Spring 中事务失效的几种原因</h1><p>Spring中的事务可以失效的几种常见原因包括：</p><ol><li><p><strong>方法没有被代理：</strong> Spring的事务管理依赖于AOP（面向切面编程），通常通过代理机制来实现事务控制。如果您在一个没有被Spring代理的方法中调用另一个有事务注解的方法，事务将无法生效。确保使用Spring容器管理的bean上的事务注解可以被AOP拦截。</p></li><li><p><strong>不同的事务管理器：</strong> 如果您在应用程序中配置了多个事务管理器，而且在使用事务时没有明确指定使用哪个事务管理器，那么事务可能会失效。确保在需要的地方明确指定事务管理器。</p></li><li><p><strong>异常没有被正确处理：</strong> Spring事务通常依赖于异常来决定是提交事务还是回滚事务。如果您在被事务管理的方法中捕获了异常并且没有将其重新抛出，事务可能会继续提交。要确保事务正确回滚，您需要在捕获异常后将其重新抛出或者在方法上配置<code>@Transactional</code>注解的<code>rollbackFor</code>属性来指定需要回滚的异常类型。</p></li><li><p><strong>嵌套事务配置错误：</strong> 如果在嵌套事务中，外部事务已经提交，但内部事务抛出异常并希望回滚，如果事务的传播行为不正确配置，可能会导致事务失效。确保使用正确的传播行为来管理嵌套事务。</p></li><li><p><strong>AOP配置问题：</strong> 如果AOP配置不正确，可能导致事务管理器无法拦截方法调用，从而导致事务失效。确保您的AOP配置正确并且覆盖了需要事务管理的方法。</p></li><li><p><strong>数据库不支持事务：</strong> 如果您的数据库不支持事务或者没有正确配置事务管理器以与数据库交互，事务将无法生效。确保您使用的数据库支持事务，并且Spring事务管理器与数据库连接池正确集成。</p></li><li><p><strong>使用了非受管的资源：</strong> 如果在受管事务中使用了非受管的资源（如打开的文件、网络连接等），这些资源可能不会参与到Spring事务管理中，导致事务失效。确保使用的资源与Spring事务管理器兼容。</p></li><li><p><strong>事务的隔离级别问题：</strong> 选择不合适的事务隔离级别可能导致意外的问题，例如脏读、不可重复读和幻读。确保为每个事务选择合适的隔离级别。</p></li><li><p><strong>未配置Spring事务管理器：</strong> 如果您没有正确配置Spring事务管理器，事务将无法生效。确保在Spring配置文件中配置了适当的事务管理器。</p></li></ol><p>要解决事务失效的问题，需要仔细检查应用程序的配置，确保AOP、事务管理器、事务注解和方法的使用都正确，以及数据库和资源的配置是正确的。同时，确保您了解事务的概念和隔离级别，以便正确地配置和管理事务。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Mybatis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mybatis 框架的优缺点</title>
+      <link href="/2023/09/13/Mybatis-%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/"/>
+      <url>/2023/09/13/Mybatis-%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Mybatis-框架的优缺点"><a href="#Mybatis-框架的优缺点" class="headerlink" title="Mybatis 框架的优缺点"></a>Mybatis 框架的优缺点</h1><p>MyBatis（也称为iBatis）是一个用于Java应用程序的持久层框架，它提供了一种将SQL查询和数据库操作与Java代码进行解耦的方式。MyBatis的优点和缺点如下：</p><p><strong>优点：</strong></p><ol><li><p><strong>简单明了的SQL映射：</strong> MyBatis允许您将SQL语句映射到Java方法，以及将查询结果映射到Java对象，这种映射非常直观和可读。</p></li><li><p><strong>灵活性：</strong> MyBatis不会强制您使用特定的对象关系映射（ORM）模式，因此您可以直接编写SQL查询，这对于需要高度优化的复杂查询非常有用。</p></li><li><p><strong>性能优化：</strong> 由于可以直接编写SQL，MyBatis使您能够对SQL进行微调，以获得最佳性能。此外，MyBatis还提供了一些缓存机制，以减少数据库访问的次数，提高性能。</p></li><li><p><strong>轻量级：</strong> MyBatis框架本身相对轻量级，不引入过多的复杂性和抽象，这使得它易于学习和使用。</p></li><li><p><strong>与现有数据库集成：</strong> MyBatis可以与现有的数据库存储过程、触发器和自定义函数集成得很好。</p></li><li><p><strong>可扩展性：</strong> MyBatis提供了插件机制，允许您自定义和扩展框架的功能，以满足特定需求。</p></li></ol><p><strong>缺点：</strong></p><ol><li><p><strong>需要手动编写SQL：</strong> 虽然MyBatis的灵活性是它的优点之一，但也意味着您需要手动编写和维护SQL语句，这对于那些不熟悉SQL或更喜欢自动化ORM框架的开发人员来说可能会感到繁琐。</p></li><li><p><strong>配置复杂性：</strong> MyBatis的配置文件可以变得相当复杂，特别是在处理复杂数据映射和多表关联时。</p></li><li><p><strong>不适用于所有场景：</strong> MyBatis更适合需要高度定制化数据库访问的场景，对于标准的CRUD操作，使用ORM框架如Hibernate可能更方便。</p></li><li><p><strong>学习曲线：</strong> 对于那些不熟悉SQL的开发人员来说，学习MyBatis可能需要一些时间，尤其是对于高级功能的使用。</p></li></ol><p>总之，MyBatis在需要对数据库访问进行精细控制和性能优化的项目中具有明显的优势。但对于那些更喜欢自动化ORM或不需要复杂SQL定制的项目来说，可能会选择其他框架。选择使用MyBatis还是其他持久层框架应该根据项目需求和开发团队的技能来进行权衡和决策。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> Mybatis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring MVC 和 Structs2 的区别</title>
+      <link href="/2023/09/13/Spring-MVC-%E5%92%8C-Structs2-%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+      <url>/2023/09/13/Spring-MVC-%E5%92%8C-Structs2-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-MVC-和-Structs2-的区别"><a href="#Spring-MVC-和-Structs2-的区别" class="headerlink" title="Spring MVC 和 Structs2 的区别"></a>Spring MVC 和 Structs2 的区别</h1><p>Spring MVC 和 Struts2 都是用于构建Java Web应用程序的框架，它们有一些相似之处，但也有一些重要的区别。下面是它们之间的主要区别：</p><ol><li><p>框架类型：</p><ul><li>Spring MVC是一个基于Spring框架的一部分，它提供了一个灵活的、模块化的方式来构建Web应用程序。Spring框架本身是一个综合性的应用程序开发框架，不仅仅用于Web开发。</li><li>Struts2是一个独立的Web应用程序框架，它专门用于构建Web应用程序。它是Struts 1.x的继承者，但完全重写了架构，提供了更现代、更灵活的方式来处理Web请求。</li></ul></li><li><p>架构风格：</p><ul><li>Spring MVC采用了MVC（Model-View-Controller）架构风格，将应用程序分为模型、视图和控制器三个部分，使代码更易于组织和维护。</li><li>Struts2也采用了MVC架构，但它使用了不同的实现方式，包括拦截器和动作等概念，使其更加灵活和可扩展。</li></ul></li><li><p>配置方式：</p><ul><li>Spring MVC通常使用XML配置或Java配置来定义控制器、视图解析器、拦截器等组件。</li><li>Struts2使用XML配置或注解来定义动作、拦截器栈等组件。它的配置文件通常更加简洁。</li></ul></li><li><p>注解支持：</p><ul><li>Spring MVC对注解的支持非常强大，可以使用注解来定义控制器、请求映射、请求参数绑定等。</li><li>Struts2也支持注解，但在注解方面相对较少，更多地依赖于XML配置。</li></ul></li><li><p>数据绑定和验证：</p><ul><li>Spring MVC提供了强大的数据绑定和验证支持，可以方便地将表单数据绑定到模型对象，并进行验证。</li><li>Struts2也提供了数据绑定和验证功能，但在某些情况下可能需要更多的配置。</li></ul></li><li><p>扩展性和插件：</p><ul><li>Spring MVC的扩展性很强，可以轻松集成其他Spring框架的组件，例如Spring Security、Spring Data等。</li><li>Struts2也具有良好的扩展性，并且有丰富的插件生态系统，可以方便地添加额外的功能。</li></ul></li><li><p>社区和生态系统：</p><ul><li>Spring框架拥有广泛的社区支持和生态系统，提供了丰富的文档和教程。</li><li>Struts2虽然不如Spring流行，但仍然有一个活跃的社区和一些有用的资源。</li></ul></li></ol><p>选择使用Spring MVC还是Struts2取决于您的项目需求、团队的熟悉程度以及个人偏好。两者都可以用来构建强大的Web应用程序，但具体的选择应该根据项目的特定情况和要求来决定。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个Http请求就是一个线程吗</title>
+      <link href="/2023/09/13/%E4%B8%80%E4%B8%AAHttp%E8%AF%B7%E6%B1%82%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%97/"/>
+      <url>/2023/09/13/%E4%B8%80%E4%B8%AAHttp%E8%AF%B7%E6%B1%82%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%97/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一个Http请求就是一个线程吗"><a href="#一个Http请求就是一个线程吗" class="headerlink" title="一个Http请求就是一个线程吗"></a>一个Http请求就是一个线程吗</h1><p>不一定。在传统的同步阻塞式的 Web 服务器中，通常每个 HTTP 请求都会对应一个线程。这意味着每当有新的请求到达服务器，就会创建一个新的线程来处理该请求，直到请求处理完成。</p><p>然而，在现代的 Web 服务器和应用程序中，通常会使用一种称为”线程池”的技术来管理线程。线程池会预先创建一组线程，并将它们保持在可用状态，以便在需要时重用。当 HTTP 请求到达时，它们会从线程池中获取一个可用的线程来处理请求，而不是为每个请求都创建一个新线程。这种方法可以减少线程创建和销毁的开销，提高性能和资源利用率。</p><p>此外，还有一些现代的 Web 服务器，如基于事件驱动的服务器（如Nginx、Node.js），它们使用单线程或少量线程来异步处理大量的连接和请求，而不是为每个请求创建一个线程。这些服务器使用事件循环和非阻塞 I&#x2F;O 操作来实现高性能。</p><p>因此，虽然传统的方式是每个 HTTP 请求对应一个线程，但现代 Web 服务器和应用程序采用了更高效的线程管理方式，可以灵活地处理多个请求而不必为每个请求创建一个线程。这有助于提高性能和资源利用率。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring中用到的设计模式</title>
+      <link href="/2023/09/13/Spring%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2023/09/13/Spring%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring中用到的设计模式"><a href="#Spring中用到的设计模式" class="headerlink" title="Spring中用到的设计模式"></a>Spring中用到的设计模式</h1><p>Spring Framework 是一个强大的开发框架，它支持多种设计模式，以帮助开发人员构建可维护、可扩展的应用程序。以下是一些在 Spring 中常用的设计模式：</p><ol><li><p><strong>单例模式（Singleton Pattern）</strong>：<br>Spring 容器默认情况下会创建单例的 Bean 对象，确保每个 Bean 只有一个实例。这有助于减少资源消耗并提高性能。</p></li><li><p><strong>工厂模式（Factory Pattern）</strong>：<br>Spring 使用工厂模式来创建和管理 Bean 对象。您可以使用不同的工厂方法来创建和配置 Bean。</p></li><li><p><strong>依赖注入模式（Dependency Injection Pattern）</strong>：<br>这是 Spring 的核心设计模式之一。Spring 使用依赖注入来管理 Bean 之间的依赖关系，通过构造函数、setter 方法或字段注入来实现。</p></li><li><p><strong>观察者模式（Observer Pattern）</strong>：<br>Spring 中的事件机制是观察者模式的一种实现。您可以发布和监听事件，以响应应用程序中的状态变化。</p></li><li><p><strong>模板方法模式（Template Method Pattern）</strong>：<br>Spring 提供了多种模板类，如 JdbcTemplate 和 HibernateTemplate，它们使用了模板方法模式，简化了常见操作的实现。</p></li><li><p><strong>策略模式（Strategy Pattern）</strong>：<br>Spring 的 AOP（面向切面编程）和事务管理使用了策略模式，允许您在运行时动态地选择算法或行为。</p></li><li><p><strong>装饰器模式（Decorator Pattern）</strong>：<br>Spring AOP 允许您通过装饰器模式来添加横切关注点（如日志、安全性等）到应用程序中的方法。</p></li><li><p><strong>适配器模式（Adapter Pattern）</strong>：<br>Spring 提供了不同数据访问技术的适配器，使其能够与 Spring 的数据访问抽象接口协同工作，如 JDBC、JPA、Hibernate 等。</p></li><li><p><strong>建造者模式（Builder Pattern）</strong>：<br>Spring 中的<code>@Configuration</code>类和<code>@Bean</code>方法可以用于创建和配置复杂的对象图，这类似于建造者模式的概念。</p></li><li><p><strong>享元模式（Flyweight Pattern）</strong>：<br>Spring 的 Bean 范围（如单例、原型、请求、会话等）可以被看作是享元模式的一种应用，共享一些通用的状态。</p></li></ol><p>这些是 Spring 中常用的设计模式，Spring 的设计和组件都充分考虑了这些模式，以帮助您构建高质量、可维护的应用程序。根据具体的需求，您可以选择使用适当的设计模式来构建应用程序的不同部分。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SpringBoot的启动机制</title>
+      <link href="/2023/09/13/SpringBoot%E7%9A%84%E5%90%AF%E5%8A%A8%E6%9C%BA%E5%88%B6/"/>
+      <url>/2023/09/13/SpringBoot%E7%9A%84%E5%90%AF%E5%8A%A8%E6%9C%BA%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="SpringBoot的启动机制"><a href="#SpringBoot的启动机制" class="headerlink" title="SpringBoot的启动机制"></a>SpringBoot的启动机制</h1><p>Spring Boot的启动机制主要分为以下几个步骤：</p><ol><li>加载Spring Boot的核心配置文件：Spring Boot会首先加载classpath下的application.properties或application.yml文件，这些文件中包含了Spring Boot的核心配置信息。</li><li>启动内嵌的Tomcat、Jetty或Undertow服务器：Spring Boot会自动根据classpath中的依赖项来判断应该使用哪种服务器，然后启动内嵌的服务器。</li><li>扫描并加载应用程序的组件：Spring Boot会扫描应用程序中所有带有@Component、@Service、@Repository和@Controller等注解的类，并将它们注册为Spring Bean。</li><li>自动配置Spring：Spring Boot会根据classpath中的依赖项和应用程序的配置信息，自动配置Spring框架。</li><li>运行应用程序：Spring Boot会启动一个线程来运行应用程序，监听来自客户端的请求，并将请求分发给相应的Controller进行处理。</li></ol><p>总的来说，Spring Boot的启动机制主要包括加载配置文件、启动内嵌服务器、扫描并加载组件、自动配置Spring和运行应用程序等几个关键步骤，这些步骤的顺序和具体实现方式会根据不同的应用场景和配置文件而有所不同。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring MVC 中 DispatcherServlet工作流程</title>
+      <link href="/2023/09/13/Spring-MVC-%E4%B8%AD-DispatcherServlet%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/"/>
+      <url>/2023/09/13/Spring-MVC-%E4%B8%AD-DispatcherServlet%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-MVC-中-DispatcherServlet工作流程"><a href="#Spring-MVC-中-DispatcherServlet工作流程" class="headerlink" title="Spring MVC 中 DispatcherServlet工作流程"></a>Spring MVC 中 DispatcherServlet工作流程</h1><p>Spring MVC中的DispatcherServlet是整个MVC框架的核心，它的工作流程如下：</p><ol><li>当用户发送请求时，请求首先会被DispatcherServlet拦截。</li><li>DispatcherServlet会根据请求的URL找到对应的HandlerMapping，HandlerMapping会根据请求的URL匹配到对应的Controller。</li><li>Controller处理请求并返回ModelAndView，其中Model是一个Map类型的对象，保存了处理结果的数据，View是一个逻辑视图名，表示要返回的视图名称。</li><li>DispatcherServlet根据返回的逻辑视图名找到对应的ViewResolver，ViewResolver会根据逻辑视图名解析出对应的物理视图。</li><li>DispatcherServlet将Model传递给View，View将Model中的数据渲染到物理视图中，并返回给DispatcherServlet。</li><li>DispatcherServlet将渲染后的视图返回给用户。</li></ol><p>总的来说，DispatcherServlet的工作流程包括请求拦截、HandlerMapping匹配、Controller处理、ViewResolver解析、View渲染和响应返回等几个关键步骤，这些步骤的顺序和具体实现方式会根据不同的应用场景和配置文件而有所不同。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>讲讲Spring框架的加载流程</title>
       <link href="/2023/09/13/%E8%AE%B2%E8%AE%B2Spring%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B/"/>
       <url>/2023/09/13/%E8%AE%B2%E8%AE%B2Spring%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B/</url>
