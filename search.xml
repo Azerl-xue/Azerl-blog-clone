@@ -60,6 +60,64 @@
     
     
     <entry>
+      <title>Spring中使用异步</title>
+      <link href="/2023/10/13/Spring%E5%BC%82%E6%AD%A5@Async/"/>
+      <url>/2023/10/13/Spring%E5%BC%82%E6%AD%A5@Async/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring中使用异步"><a href="#Spring中使用异步" class="headerlink" title="Spring中使用异步"></a>Spring中使用异步</h1><p><code>@EnableAsync</code> 是 Spring 框架的注解，用于启用异步方法的支持。它告诉Spring容器在应用程序中查找标记为 <code>@Async</code> 的方法，并在后台线程中执行这些方法，以实现异步处理。使用异步方法可以提高应用程序的性能和响应性，特别是对于那些可能需要一些时间来执行的操作，如长时间的I&#x2F;O操作或复杂的计算。</p><p>以下是 <code>@EnableAsync</code> 的主要用途和好处：</p><ol><li><p><strong>提高性能</strong>：通过将一些耗时的操作异步化，您可以避免阻塞应用程序主线程，从而提高应用程序的性能和响应性。这对于高并发应用和请求处理很有用。</p></li><li><p><strong>并行处理</strong>：异步方法可以在后台线程中并行执行，充分利用多核处理器和资源，以加速任务的完成。</p></li><li><p><strong>改善用户体验</strong>：异步处理可以改善用户体验，因为用户不需要等待长时间的操作完成，而是可以继续使用应用程序。</p></li><li><p><strong>简化代码</strong>：使用 <code>@Async</code> 注解，您可以更容易地将异步操作与同步操作结合使用，而无需编写繁琐的多线程代码。</p></li></ol><p>使用示例：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableAsync;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Async;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAsyncConfig</span> &#123;</span><br><span class="line">    <span class="comment">// 配置类上使用@EnableAsync启用异步方法支持</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Async</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">performAsyncTask</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 异步任务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在上述示例中，<code>@EnableAsync</code> 注解启用了异步方法支持，然后 <code>performAsyncTask</code> 方法上使用 <code>@Async</code> 注解表示这是一个异步方法。调用这个方法时，它将在后台线程中执行。</p><p>总之，<code>@EnableAsync</code> 注解用于启用Spring应用程序中异步方法的支持，以提高性能、并行处理和改善用户体验。异步方法通常用于处理需要一些时间的操作，使应用程序更加高效和响应。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 后端 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> 异步 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ServletComponentScan注解的作用</title>
+      <link href="/2023/10/12/@ServletComponentScan%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+      <url>/2023/10/12/@ServletComponentScan%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ServletComponentScan注解的作用"><a href="#ServletComponentScan注解的作用" class="headerlink" title="@ServletComponentScan注解的作用"></a>@ServletComponentScan注解的作用</h1><p><code>@ServletComponentScan</code> 是 Spring 框架中的注解，用于启用自动扫描和注册基于Servlet 3.0+规范的注解，例如 <code>@WebServlet</code>、<code>@WebFilter</code> 和 <code>@WebListener</code>。这个注解通常用于Spring Boot应用程序，以简化Web组件的注册。</p><p>具体而言，<code>@ServletComponentScan</code> 的作用如下：</p><ol><li><p><strong>自动注册Servlet、Filter和Listener</strong>：使用 <code>@ServletComponentScan</code> 注解后，Spring Boot应用程序会自动扫描并注册在项目中使用 <code>@WebServlet</code>、<code>@WebFilter</code> 和 <code>@WebListener</code> 注解标记的类，而无需在<code>web.xml</code>中手动配置它们。</p></li><li><p><strong>简化配置</strong>：这个注解有助于减少项目中的XML配置或手动注册Servlet、Filter和Listener的工作，提高开发效率。</p></li></ol><p>使用示例：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.web.servlet.ServletComponentScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span> <span class="comment">// 启用自动扫描和注册Servlet、Filter、Listener</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(MyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后，您可以在项目中使用 <code>@WebServlet</code>、<code>@WebFilter</code> 和 <code>@WebListener</code> 注解来标记相应的类，以将它们注册到应用程序中，而不需要显式配置<code>web.xml</code>。</p><p>总之，<code>@ServletComponentScan</code> 注解用于在Spring Boot应用程序中启用自动扫描和注册基于Servlet 3.0+规范的注解，使您能够更轻松地管理和配置Web组件。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 后端 </tag>
+            
+            <tag> Spring </tag>
+            
+            <tag> Servlet </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>saas项目日志</title>
       <link href="/2023/09/24/saas%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/"/>
       <url>/2023/09/24/saas%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/</url>
